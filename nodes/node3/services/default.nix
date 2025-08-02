@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./fishnet.nix
+  ];
+}
