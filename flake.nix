@@ -2,7 +2,7 @@
   description = "NixOS configuration for my homelab nodes";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +15,14 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # PR: nixos/beszel-agent: Enable systemd monitoring
+    # https://github.com/NixOS/nixpkgs/pull/461327
+    nixpkgs-beszel-pr = {
+      url = "github:NixOS/nixpkgs/refs/pull/461327/merge";
+      flake = false;
+    };
+
   };
 
   outputs =
@@ -22,51 +30,57 @@
       self,
       nixpkgs,
       deploy-rs,
+      turing-rk1,
+      sops-nix,
       ...
     }@inputs:
     let
-      mkNixosConfig =
-        hostname: system:
+      inherit (nixpkgs) lib;
+
+      hosts = {
+        node1 = {
+          ipv4 = "10.0.10.1";
+          ipv6 = "2a02:168:a1ea::11";
+        };
+        node3 = {
+          ipv4 = "10.0.10.3";
+          ipv6 = "2a02:168:a1ea::13";
+        };
+      };
+
+      mkNixosSystem =
+        name: host:
         nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "aarch64-linux";
           specialArgs = {
-            inherit inputs;
-            meta = { inherit hostname; };
+            inherit inputs host;
+            meta = {
+              hostname = name;
+            };
           };
           modules = [
-            inputs.turing-rk1.nixosModules.turing-rk1
-            inputs.sops-nix.nixosModules.sops
-            ./nodes/${hostname}
+            turing-rk1.nixosModules.turing-rk1
+            sops-nix.nixosModules.sops
+            ./nodes/${name}.nix
           ];
         };
 
-      mkDeployNode =
-        hostname: nixosSystem:
-        let
-          system = nixosSystem.pkgs.stdenv.hostPlatform.system;
-        in
-        {
-          inherit hostname;
-          # Enable on first run
-          # sshUser = "nixos";
-          sshUser = "root";
-          user = "root";
-          autoRollback = false;
-          magicRollback = false;
-          remoteBuild = true;
-
-          profiles.system.path = deploy-rs.lib.${system}.activate.nixos nixosSystem;
-        };
+      mkDeploy = name: host: {
+        # Enable on first run
+        # sshUser = "nixos";
+        hostname = name;
+        profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${name};
+      };
     in
     {
-      nixosConfigurations = {
-        node1 = mkNixosConfig "node1" "aarch64-linux";
-        node3 = mkNixosConfig "node3" "aarch64-linux";
-      };
-
-      deploy.nodes = {
-        node1 = mkDeployNode "node1.lan" self.nixosConfigurations.node1;
-        node3 = mkDeployNode "node3.lan" self.nixosConfigurations.node3;
+      nixosConfigurations = lib.mapAttrs mkNixosSystem hosts;
+      deploy = {
+        nodes = lib.mapAttrs mkDeploy hosts;
+        sshUser = "root";
+        user = "root";
+        autoRollback = false;
+        magicRollback = false;
+        remoteBuild = true;
       };
     };
 }

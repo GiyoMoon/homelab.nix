@@ -10,15 +10,17 @@
 # $ sudo nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
 #
 # create the encrypted secrets file
-# $ nix-shell -p sops --run "sops nodes/node3/secrets/secrets.json"
+# $ nix-shell -p sops --run "sops secrets/secrets.json"
 # if .sops.yaml gets changed, update encrypted file(s) with new keys:
-# $ nix-shell -p sops --run "sops updatekeys nodes/node3/secrets/secrets.json"
+# $ nix-shell -p sops --run "sops updatekeys secrets/secrets.json"
 keys:
   - &local age1ucqcz2l8mnawv76ujer8k4v7pp39mg70vpudtwnyt7dc36g4te9szyrlc4
+  - &node1 age1mlmc3cwrfqgr35f2wtrrak7yu5n4hcu524em8d09w8wndxu6gcrsscpy40
   - &node3 age10j9wyyz9a70ar75l4nd99vvpsalvvra0xg92sju3zycy5q9qjchsfna36x
 creation_rules:
-  - path_regex: nodes/node3/secrets/secrets.json$
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *local
+      - *node1
       - *node3

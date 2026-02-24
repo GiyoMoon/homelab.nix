@@ -32,8 +32,13 @@
 
   environment.etc."fishnet/fishnet.ini".text = ''
     [fishnet]
-    cores=7
+    cores=4
     userbacklog=0
     systembacklog=0
   '';
+
+  sops.secrets.fishnet_key = {
+    owner = "fishnet";
+    mode = "0400";
+  };
 }
