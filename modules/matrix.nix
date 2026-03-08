@@ -15,6 +15,7 @@
         allow_federation = true;
         trusted_servers = [
           "unredacted.org"
+          "fairydust.space"
           "nope.chat"
           "immer.chat"
           "catgirl.cloud"

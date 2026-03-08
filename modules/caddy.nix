@@ -57,6 +57,12 @@
         try_files {path} /index.html
         file_server
       '';
+      "ntfy.outerwilds.space".extraConfig = ''
+        reverse_proxy localhost${toString config.services.ntfy-sh.settings.listen-http}
+      '';
+      "status.goo.garden".extraConfig = ''
+        reverse_proxy localhost:${toString config.services.uptime-kuma.settings.PORT}
+      '';
     };
   };
 

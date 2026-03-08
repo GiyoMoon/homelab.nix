@@ -15,14 +15,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # PR: nixos/beszel-agent: Enable systemd monitoring
-    # https://github.com/NixOS/nixpkgs/pull/461327
-    nixpkgs-beszel-pr = {
-      url = "github:NixOS/nixpkgs/refs/pull/461327/merge";
-      flake = false;
-    };
-
   };
 
   outputs =

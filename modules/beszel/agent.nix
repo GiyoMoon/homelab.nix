@@ -1,14 +1,10 @@
 {
   pkgs,
   config,
-  inputs,
   meta,
   ...
 }:
 {
-  disabledModules = [ "services/monitoring/beszel-agent.nix" ];
-  imports = [ "${inputs.nixpkgs-beszel-pr}/nixos/modules/services/monitoring/beszel-agent.nix" ];
-
   services.beszel.agent = {
     enable = true;
     openFirewall = true;
