@@ -60,6 +60,9 @@
       "ntfy.outerwilds.space".extraConfig = ''
         reverse_proxy localhost${toString config.services.ntfy-sh.settings.listen-http}
       '';
+      "log.outerwilds.space".extraConfig = ''
+        reverse_proxy localhost:${toString config.services.hedgedoc.settings.port}
+      '';
       "status.goo.garden".extraConfig = ''
         reverse_proxy localhost:${toString config.services.uptime-kuma.settings.PORT}
       '';

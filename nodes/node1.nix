@@ -7,5 +7,6 @@
     ../modules/beszel/hub.nix
     ../modules/ntfy.nix
     ../modules/kuma.nix
+    ../modules/hedgedoc.nix
   ];
 }
