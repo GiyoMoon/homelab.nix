@@ -8,5 +8,6 @@
     ../modules/ntfy.nix
     ../modules/kuma.nix
     ../modules/hedgedoc.nix
+    ../modules/malocher_timer.nix
   ];
 }

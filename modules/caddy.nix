@@ -63,6 +63,19 @@
       "log.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:${toString config.services.hedgedoc.settings.port}
       '';
+      "maloche.outerwilds.space".extraConfig = ''
+        root * /var/www/maloche
+        encode gzip
+
+        handle /api* {
+          reverse_proxy localhost:8092
+        }
+
+        handle {
+          try_files {path} /index.html
+          file_server
+        }
+      '';
       "status.goo.garden".extraConfig = ''
         reverse_proxy localhost:${toString config.services.uptime-kuma.settings.PORT}
       '';
