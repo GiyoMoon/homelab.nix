@@ -63,6 +63,9 @@
       "log.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:${toString config.services.hedgedoc.settings.port}
       '';
+      "screen.outerwilds.space".extraConfig = ''
+        reverse_proxy localhost:5050
+      '';
       "maloche.outerwilds.space".extraConfig = ''
         root * /var/www/maloche
         encode gzip
