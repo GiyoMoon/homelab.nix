@@ -66,6 +66,16 @@
       "screen.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:5050
       '';
+      "id.outerwilds.space".extraConfig = ''
+        reverse_proxy https://${config.services.kanidm.server.settings.bindaddress} {
+          transport http {
+            tls_insecure_skip_verify
+          }
+        }
+      '';
+      "cal.outerwilds.space".extraConfig = ''
+        reverse_proxy localhost:8094
+      '';
       "maloche.outerwilds.space".extraConfig = ''
         root * /var/www/maloche
         encode gzip

@@ -5,6 +5,4 @@
       PORT = "6170";
     };
   };
-
-  networking.firewall.allowedTCPPorts = [ 6170 ];
 }

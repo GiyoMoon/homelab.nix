@@ -10,6 +10,8 @@
     ../modules/hedgedoc.nix
     ../modules/screego.nix
     ../modules/mumble.nix
+    ../modules/kanidm.nix
+    ../modules/rustical.nix
     ../modules/malocher_timer.nix
   ];
 }
