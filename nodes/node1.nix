@@ -9,6 +9,7 @@
     ../modules/kuma.nix
     ../modules/hedgedoc.nix
     ../modules/screego.nix
+    ../modules/mumble.nix
     ../modules/malocher_timer.nix
   ];
 }
