@@ -81,4 +81,47 @@
       group = "kanidm";
     };
   };
+
+  services.restic.backups.kanidm = {
+    environmentFile = config.sops.templates.restic_env.path;
+
+    paths = [
+      "/var/lib/kanidm"
+    ];
+
+    extraBackupArgs = [
+      "--tag kanidm"
+    ];
+
+    timerConfig = {
+      OnCalendar = "*-*-* 04:00:00";
+      Persistent = true;
+    };
+
+    initialize = true;
+
+    pruneOpts = [
+      "--keep-last 7"
+      "--keep-weekly 4"
+      "--keep-monthly 12"
+    ];
+  };
+
+  systemd = {
+    timers.kanidm-backup = {
+      description = "Daily kanidm backup";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*-*-* 03:00:00";
+        Persistent = true;
+      };
+    };
+    services.kanidm-backup = {
+      description = "Trigger kanidm database backup";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.sqlite}/bin/sqlite3 /var/lib/kanidm/kanidm.db \".backup /var/lib/kanidm/kanidm.db.backup\"";
+      };
+    };
+  };
 }
