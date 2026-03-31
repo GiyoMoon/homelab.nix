@@ -9,6 +9,7 @@
 {
   imports = [
     ./beszel/agent.nix
+    ./restic.nix
   ];
   nix.settings = {
     auto-optimise-store = true;
