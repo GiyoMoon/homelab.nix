@@ -57,4 +57,47 @@
   systemd.tmpfiles.rules = [
     "d /var/lib/rustical 0750 rustical rustical -"
   ];
+
+  services.restic.backups.rustical = {
+    environmentFile = config.sops.templates.restic_env.path;
+
+    paths = [
+      "/var/lib/rustical"
+    ];
+
+    extraBackupArgs = [
+      "--tag rustical"
+    ];
+
+    timerConfig = {
+      OnCalendar = "*-*-* 04:00:00";
+      Persistent = true;
+    };
+
+    initialize = true;
+
+    pruneOpts = [
+      "--keep-last 7"
+      "--keep-weekly 4"
+      "--keep-monthly 12"
+    ];
+  };
+
+  systemd = {
+    timers.rustical-backup = {
+      description = "Daily rustical backup";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*-*-* 03:00:00";
+        Persistent = true;
+      };
+    };
+    services.rustical-backup = {
+      description = "Trigger rustical backup";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.sqlite}/bin/sqlite3 /var/lib/rustical/db.sqlite \".backup /var/lib/rustical/db.sqlite.backup\"";
+      };
+    };
+  };
 }
