@@ -94,7 +94,7 @@
     ];
 
     timerConfig = {
-      OnCalendar = "*-*-* 04:00:00";
+      OnCalendar = "*-*-* 04:02:00";
       Persistent = true;
     };
 

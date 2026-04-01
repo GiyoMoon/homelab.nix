@@ -70,7 +70,7 @@
     ];
 
     timerConfig = {
-      OnCalendar = "*-*-* 04:00:00";
+      OnCalendar = "*-*-* 04:06:00";
       Persistent = true;
     };
 
