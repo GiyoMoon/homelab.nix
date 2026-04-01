@@ -15,6 +15,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chaos_spaces = {
+      url = "github:GiyoMoon/chaos_spaces";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

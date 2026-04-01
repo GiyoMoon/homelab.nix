@@ -76,6 +76,13 @@
       "cal.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:8094
       '';
+      "spaces.outerwilds.space".extraConfig = ''
+        encode gzip
+
+        handle /api* {
+          reverse_proxy localhost:8095
+        }
+      '';
       "maloche.outerwilds.space".extraConfig = ''
         root * /var/www/maloche
         encode gzip
