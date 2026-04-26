@@ -12,7 +12,7 @@
     ../modules/mumble.nix
     ../modules/kanidm.nix
     ../modules/rustical.nix
-    ../modules/chaos_spaces.nix
+    # ../modules/chaos_spaces.nix
     ../modules/malocher_timer.nix
   ];
 }

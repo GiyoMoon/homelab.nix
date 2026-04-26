@@ -61,6 +61,11 @@
         reverse_proxy localhost${toString config.services.ntfy-sh.settings.listen-http}
       '';
       "log.outerwilds.space".extraConfig = ''
+        handle_path /fonts/* {
+          root /var/www/hedgedoc-fonts
+          file_server
+        }
+
         reverse_proxy localhost:${toString config.services.hedgedoc.settings.port}
       '';
       "screen.outerwilds.space".extraConfig = ''
@@ -76,13 +81,13 @@
       "cal.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:8094
       '';
-      "spaces.outerwilds.space".extraConfig = ''
-        encode gzip
-
-        handle /api* {
-          reverse_proxy localhost:8095
-        }
-      '';
+      # "spaces.outerwilds.space".extraConfig = ''
+      #   encode gzip
+      #
+      #   handle /api* {
+      #     reverse_proxy localhost:8095
+      #   }
+      # '';
       "maloche.outerwilds.space".extraConfig = ''
         root * /var/www/maloche
         encode gzip
