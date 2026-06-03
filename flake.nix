@@ -49,7 +49,7 @@
         nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
-            inherit inputs host;
+            inherit inputs host hosts;
             meta = {
               hostname = name;
             };

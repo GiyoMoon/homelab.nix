@@ -88,6 +88,9 @@
       #     reverse_proxy localhost:8095
       #   }
       # '';
+      # "home.outerwilds.space".extraConfig = ''
+      #   reverse_proxy localhost:8123
+      # '';
       "maloche.outerwilds.space".extraConfig = ''
         root * /var/www/maloche
         encode gzip

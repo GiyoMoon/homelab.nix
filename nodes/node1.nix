@@ -12,6 +12,7 @@
     ../modules/mumble.nix
     ../modules/kanidm.nix
     ../modules/rustical.nix
+    # ../modules/home_assistant.nix
     # ../modules/chaos_spaces.nix
     ../modules/malocher_timer.nix
   ];
