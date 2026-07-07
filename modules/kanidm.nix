@@ -58,6 +58,40 @@
             ];
           };
         };
+        vaultwarden = {
+          present = true;
+          displayName = "vault.outerwilds.space";
+          originUrl = "https://vault.outerwilds.space/";
+          originLanding = "https://vault.outerwilds.space/identity/connect/oidc-signin";
+          public = false;
+          preferShortUsername = true;
+          basicSecretFile = config.sops.secrets.kanidm_vaultwarden_secret.path;
+
+          scopeMaps = {
+            users = [
+              "openid"
+              "email"
+              "profile"
+            ];
+          };
+        };
+        fusion = {
+          present = true;
+          displayName = "rss.outerwilds.space";
+          originUrl = "https://rss.outerwilds.space/";
+          originLanding = "https://rss.outerwilds.space/api/oidc/callback";
+          public = false;
+          preferShortUsername = true;
+          basicSecretFile = config.sops.secrets.kanidm_fusion_secret.path;
+
+          scopeMaps = {
+            users = [
+              "openid"
+              "email"
+              "profile"
+            ];
+          };
+        };
       };
     };
   };
@@ -76,6 +110,16 @@
       group = "kanidm";
     };
     kanidm_rustical_secret = {
+      mode = "0444";
+      owner = "kanidm";
+      group = "kanidm";
+    };
+    kanidm_vaultwarden_secret = {
+      mode = "0444";
+      owner = "kanidm";
+      group = "kanidm";
+    };
+    kanidm_fusion_secret = {
       mode = "0444";
       owner = "kanidm";
       group = "kanidm";

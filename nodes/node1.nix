@@ -3,7 +3,7 @@
     ../modules/common.nix
     ../modules/caddy.nix
     ../modules/ddns.nix
-    # ../modules/fishnet.nix
+    ../modules/fishnet.nix
     ../modules/beszel/hub.nix
     ../modules/ntfy.nix
     ../modules/kuma.nix
@@ -12,6 +12,8 @@
     ../modules/mumble.nix
     ../modules/kanidm.nix
     ../modules/rustical.nix
+    ../modules/vaultwarden.nix
+    ../modules/fusion.nix
     # ../modules/home_assistant.nix
     # ../modules/chaos_spaces.nix
     ../modules/malocher_timer.nix

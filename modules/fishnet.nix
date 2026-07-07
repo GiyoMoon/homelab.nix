@@ -32,7 +32,7 @@
 
   environment.etc."fishnet/fishnet.ini".text = ''
     [fishnet]
-    cores=4
+    cores=auto
     userbacklog=0
     systembacklog=0
   '';

@@ -104,4 +104,6 @@
     defaultSopsFile = ../secrets/secrets.json;
     defaultSopsFormat = "json";
   };
+
+  virtualisation.oci-containers.backend = "podman";
 }

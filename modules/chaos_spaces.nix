@@ -24,7 +24,7 @@
       StateDirectory = "chaos_spaces";
       Restart = "on-failure";
       Environment = [
-        "BIND_ADDRESS=0.0.0.0:8095"
+        "BIND_ADDRESS=[::]:8095"
         "DATABASE_URL=/var/lib/chaos_spaces/chaos_spaces.db"
       ];
     };

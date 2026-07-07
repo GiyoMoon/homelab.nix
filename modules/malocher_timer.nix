@@ -24,7 +24,7 @@
       StateDirectory = "malocher_timer";
       Restart = "on-failure";
       Environment = [
-        "BIND_ADDRESS=0.0.0.0:8092"
+        "BIND_ADDRESS=[::]:8092"
         "CLIENT_ORIGIN=https://maloche.outerwilds.space"
         "DATABASE_URL=/var/lib/malocher_timer/maloche.db"
       ];

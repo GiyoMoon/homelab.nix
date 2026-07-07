@@ -81,6 +81,12 @@
       "cal.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:8094
       '';
+      "vault.outerwilds.space".extraConfig = ''
+        reverse_proxy localhost:${toString config.services.vaultwarden.config.ROCKET_PORT}
+      '';
+      "rss.outerwilds.space".extraConfig = ''
+        reverse_proxy localhost:8097
+      '';
       # "spaces.outerwilds.space".extraConfig = ''
       #   encode gzip
       #
