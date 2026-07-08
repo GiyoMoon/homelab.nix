@@ -40,7 +40,7 @@
         abort
       '';
       "matrix.outerwilds.space".extraConfig = ''
-        reverse_proxy 10.0.10.3:6167
+        reverse_proxy 10.66.10.3:6167
       '';
       "beszel.outerwilds.space".extraConfig = ''
         reverse_proxy localhost:${toString config.services.beszel.hub.port}

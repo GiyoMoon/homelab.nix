@@ -65,7 +65,7 @@
         "${host.ipv4}/16"
         "${host.ipv6}/64"
       ];
-      gateway = [ "10.0.0.1" ];
+      gateway = [ "10.66.0.1" ];
       networkConfig = {
         IPv6AcceptRA = true;
       };

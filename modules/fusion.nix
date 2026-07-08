@@ -10,7 +10,7 @@
         FUSION_OIDC_ISSUER = "https://id.outerwilds.space/oauth2/openid/fusion";
         FUSION_OIDC_CLIENT_ID = "fusion";
         FUSION_OIDC_REDIRECT_URI = "https://rss.outerwilds.space/api/oidc/callback";
-        FUSION_TRUSTED_PROXIES = "10.0.0.0/16,2a02:168:a1ea::/64";
+        FUSION_TRUSTED_PROXIES = "10.66.0.0/16,2a02:168:a1ea::/64";
       };
       volumes = [
         "/var/lib/fusion:/data"

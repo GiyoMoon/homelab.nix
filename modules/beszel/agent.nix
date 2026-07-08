@@ -17,7 +17,7 @@
     content = ''
       KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGktxJ5TCoRUA/POj9+Iz6C4KvUlNk0WTc6J2Vro+5n"
       TOKEN="${config.sops.placeholder."beszel_token_${meta.hostname}"}"
-      HUB_URL="10.0.10.1"
+      HUB_URL="10.66.10.1"
       SKIP_GPU=true
     '';
   };
